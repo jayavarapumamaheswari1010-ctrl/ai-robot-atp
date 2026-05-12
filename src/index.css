@@ -1,0 +1,176 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Telugu:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@theme {
+  --color-brand-bg: #040d1a;
+  --color-brand-panel: #071528;
+  --color-brand-card: #0a1f38;
+  --color-brand-cyan: #00e5ff;
+  --color-brand-teal: #00b4d8;
+  --color-brand-gold: #f4c430;
+  --color-brand-text: #e2e8f0;
+  --font-telugu: "Noto Sans Telugu", "Mandali", sans-serif;
+  --font-sans: "Inter", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+:root {
+  font-family: 'Noto Sans Telugu', 'Inter', sans-serif;
+  background-color: #040d1a;
+  color: #e2e8f0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 1024px;
+  min-height: 100vh;
+  overflow: hidden;
+  background-color: #040d1a;
+  color: #e2e8f0;
+  user-select: none;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Kiosk grid background */
+.kiosk-bg {
+  background-color: #040d1a;
+  background-image:
+    linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Radial glow overlay */
+.kiosk-glow-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 70% at 20% 50%, rgba(0,180,216,0.08) 0%, transparent 70%),
+              radial-gradient(ellipse 50% 50% at 80% 50%, rgba(100,0,200,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: rgba(4,13,26,0.5); }
+::-webkit-scrollbar-thumb { background: rgba(0,229,255,0.25); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,229,255,0.5); }
+
+/* ── Pulse ring ── */
+@keyframes pulse-ring {
+  0%   { transform: scale(1);   opacity: 0.6; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+.pulse-ring {
+  animation: pulse-ring 1.8s ease-out infinite;
+}
+.pulse-ring-2 {
+  animation: pulse-ring 1.8s ease-out 0.6s infinite;
+}
+.pulse-ring-3 {
+  animation: pulse-ring 1.8s ease-out 1.2s infinite;
+}
+
+/* ── Waveform bars ── */
+@keyframes wave-bar {
+  0%, 100% { height: 6px; }
+  50%       { height: var(--wave-h, 40px); }
+}
+.wave-bar {
+  animation: wave-bar var(--wave-dur, 0.8s) ease-in-out infinite;
+  animation-delay: var(--wave-delay, 0s);
+}
+
+/* ── Scan line ── */
+@keyframes scan-line {
+  0%   { top: 0%; opacity: 0.7; }
+  100% { top: 100%; opacity: 0; }
+}
+.scan-line {
+  animation: scan-line 3s linear infinite;
+}
+
+/* ── Eye glow blink ── */
+@keyframes eye-glow {
+  0%, 90%, 100% { opacity: 1; box-shadow: 0 0 12px 4px #00e5ff; }
+  95%            { opacity: 0.1; box-shadow: none; }
+}
+.eye-glow {
+  animation: eye-glow 4s ease-in-out infinite;
+}
+
+/* ── Float robot ── */
+@keyframes robot-float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+.robot-float {
+  animation: robot-float 4s ease-in-out infinite;
+}
+
+/* ── Mic pulse ── */
+@keyframes mic-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0,229,255,0.5), 0 0 30px rgba(0,229,255,0.3); }
+  50%       { box-shadow: 0 0 0 20px rgba(0,229,255,0), 0 0 60px rgba(0,229,255,0.5); }
+}
+.mic-pulse {
+  animation: mic-pulse 1.5s ease-out infinite;
+}
+
+/* ── Typing cursor ── */
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+.blink-cursor {
+  animation: blink-cursor 1s step-end infinite;
+}
+
+/* ── Fade slide in ── */
+@keyframes fade-slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-slide-up {
+  animation: fade-slide-up 0.5s ease forwards;
+}
+
+/* ── Shimmer ── */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.shimmer-text {
+  background: linear-gradient(90deg, #00e5ff 0%, #ffffff 40%, #00e5ff 80%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s linear infinite;
+}
+
+/* ── Category tag appear ── */
+@keyframes pop-in {
+  0%   { opacity: 0; transform: scale(0.8); }
+  70%  { transform: scale(1.06); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.pop-in { animation: pop-in 0.4s ease forwards; }
+
+/* Print */
+@media print {
+  body * { visibility: hidden; }
+  .printable-fir, .printable-fir * { visibility: visible; }
+  .printable-fir {
+    position: absolute; left: 0; top: 0;
+    width: 100%; margin: 0; padding: 20px;
+    background: white; color: black;
+  }
+}
